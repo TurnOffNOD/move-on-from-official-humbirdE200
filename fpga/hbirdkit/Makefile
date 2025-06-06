@@ -1,4 +1,5 @@
-VIVADO ?= vivado
+VIVADO_INSTALL_DIR := /opt/Xilinx/Vivado/2024.2/bin
+VIVADO ?= ${VIVADO_INSTALL_DIR}/vivado
 VIVADOFLAGS := \
 	-nojournal -mode batch \
 	-source script/board.tcl \
