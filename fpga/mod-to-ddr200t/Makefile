@@ -1,4 +1,4 @@
-VIVADO_INSTALL_DIR := /opt/Xilinx/Vivado/2024.2/bin
+VIVADO_INSTALL_DIR := /opt/Xilinx/2025.1/Vivado/bin
 VIVADO ?= ${VIVADO_INSTALL_DIR}/vivado
 VIVADOFLAGS := \
 	-nojournal -mode batch \
