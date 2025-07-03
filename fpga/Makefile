@@ -1,5 +1,7 @@
 # See LICENSE for license details.
 base_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+#$(info base_dir==$(base_dir))
+$(info base_dir==$(base_dir) in $(MAKEFILE_LIST))
 #FPGA_NAME := nucleikit
 FPGA_NAME := mod-to-ddr200t
 FPGA_DIR := $(base_dir)/${FPGA_NAME}

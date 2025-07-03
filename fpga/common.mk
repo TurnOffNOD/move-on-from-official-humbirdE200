@@ -13,6 +13,9 @@ PATCHVERILOG ?= ""
 
 
 base_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+$(info base_dir==$(base_dir) in $(MAKEFILE_LIST))
+$(info PWD==$(PWD) in $(MAKEFILE_LIST))
+#$(info $(MAKEFILE_LIST))
 
 
 
