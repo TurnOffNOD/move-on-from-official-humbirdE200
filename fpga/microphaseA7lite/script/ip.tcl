@@ -5,12 +5,12 @@ set_property -dict [list \
   CONFIG.RESET_TYPE {ACTIVE_LOW} \
   CONFIG.CLKOUT1_USED {true} \
   CONFIG.CLKOUT2_USED {true} \
-  CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {8.000} \
+  CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {8.38794} \
   CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {16.000} \
   ] [get_ips mymmcm]
 
-#generate_target all [get_ips mymmcm]
   #CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {8.388608} \
+#generate_target all [get_ips mymmcm]
 
 create_ip -vendor xilinx.com -library ip -name proc_sys_reset -module_name reset_sys -dir $ipdir -force
 set_property -dict [list \

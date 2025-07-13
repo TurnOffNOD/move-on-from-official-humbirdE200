@@ -289,36 +289,35 @@ module system
   // Clock & Reset
   wire clk_8388;
   wire clk_16M;
-  reg CLK32768KHZ;
+  wire CLK32768KHZ;
 
+  clkdivider clkdivider_u
+  (
+    .clk      (clk_8388),
+    .clk_out  (CLK32768KHZ),
+    .resetn    (ck_rst)
+  );
 
-//  clkdivider clkdivider_u
-//  (
-//    .clk      (clk_8388),
-//    .clk_out  (CLK32768KHZ),
-//    .resetn    (ck_rst)
-//  );
-
-  reg [7:0] counter;
-  always @(posedge clk_8388 or negedge ck_rst)
-  begin
-    counter = (!ck_rst) ? 0 : ((counter +1) % 244);
-    CLK32768KHZ = (!ck_rst) ? 0 :
-                  ((counter ==0) ? ~CLK32768KHZ : CLK32768KHZ);
-  end
+//  reg [7:0] counter;
+//  always @(posedge clk_8388 or negedge ck_rst)
+//  begin
+//    counter = (!ck_rst) ? 0 : ((counter +1) % 122);
+//    CLK32768KHZ = (!ck_rst) ? 0 :
+//                  ((counter ==0) ? ~CLK32768KHZ : CLK32768KHZ);
+//  end
   
-  reg [15 -1: 0] clk_32768_mon2LED_counter;
+  reg [15 : 0] clk_32768_mon2LED_counter;
   always @(posedge CLK32768KHZ or negedge ck_rst)
   begin
-    clk_32768_mon2LED_counter = (!ck_rst) ? 0 : ((clk_32768_mon2LED_counter +1) % 32768);
+    clk_32768_mon2LED_counter = (!ck_rst) ? 0 : ((clk_32768_mon2LED_counter +1) % (32768/2));
     LED_mon_clk32768 = (!ck_rst) ? 1 :
                   ((clk_32768_mon2LED_counter ==0) ? ~LED_mon_clk32768 : LED_mon_clk32768);
   end
 
-  reg [26 -1: 0] board_clkin_mon2LED_counter;
+  reg [26 : 0] board_clkin_mon2LED_counter;
   always @(posedge clk_16M or negedge ck_rst)
   begin
-    board_clkin_mon2LED_counter = (!ck_rst) ? 0 : ((board_clkin_mon2LED_counter + 1) % 16000000);
+    board_clkin_mon2LED_counter = (!ck_rst) ? 0 : ((board_clkin_mon2LED_counter + 1) % (16000000/2));
     LED_mon_boardclkin = (!ck_rst) ? 0 :
                          ((board_clkin_mon2LED_counter ==0) ? ~LED_mon_boardclkin : LED_mon_boardclkin);
   end
