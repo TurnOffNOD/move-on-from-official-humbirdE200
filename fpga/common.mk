@@ -13,8 +13,8 @@ PATCHVERILOG ?= ""
 
 
 base_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-$(info base_dir==$(base_dir) in $(MAKEFILE_LIST))
-$(info PWD==$(PWD) in $(MAKEFILE_LIST))
+$(info BASEDIR=$(base_dir) in $(MAKEFILE_LIST))
+$(info PWD=$(PWD) in $(MAKEFILE_LIST))
 #$(info $(MAKEFILE_LIST))
 
 
@@ -30,6 +30,7 @@ install:
 EXTRA_FPGA_VSRCS := 
 verilog := $(wildcard ${INSTALL_RTL}/*/*.v)
 verilog += $(wildcard ${INSTALL_RTL}/*.v)
+$(info VSRCS=$(verilog) in $(MAKEFILE_LIST))
 
 
 # Build .mcs

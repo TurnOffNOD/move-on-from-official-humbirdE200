@@ -13,9 +13,12 @@ VIVADOFLAGS_SETUP := \
 # Path to a program in raw binary format to be flashed into the address that the
 # bootrom jumps to.
 FLASHED_PROGRAM ?=
+$(info VSRCS=$(VSRCS) in $(MAKEFILE_LIST))
+$(info BASEDIR=$(BASEDIR) in $(MAKEFILE_LIST))
 
 bit := obj/system.bit
 $(bit): script/impl.tcl  script/init.tcl
+	$(info VSRCS=$(VSRCS) in $(MAKEFILE_LIST))
 	VSRCS="$(VSRCS)" EXTRA_VSRCS="$(EXTRA_VSRCS)" $(VIVADO) $(VIVADOFLAGS) -source script/init.tcl -source script/impl.tcl
 
 .PHONY: bit
