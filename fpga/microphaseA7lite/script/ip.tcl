@@ -1,6 +1,7 @@
 create_ip -vendor xilinx.com -library ip -name clk_wiz -module_name mymmcm -dir $ipdir -force
 set_property -dict [list \
   CONFIG.PRIMITIVE {MMCM} \
+  CONFIG.PRIM_IN_FREQ {50.000} \
   CONFIG.RESET_TYPE {ACTIVE_LOW} \
   CONFIG.CLKOUT1_USED {true} \
   CONFIG.CLKOUT2_USED {true} \
@@ -9,7 +10,6 @@ set_property -dict [list \
   ] [get_ips mymmcm]
 
 #generate_target all [get_ips mymmcm]
-  #CONFIG.PRIM_IN_FREQ {50.000} \
   #CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {8.388608} \
 
 create_ip -vendor xilinx.com -library ip -name proc_sys_reset -module_name reset_sys -dir $ipdir -force

@@ -2,7 +2,7 @@
 module clkdivider
 (
   input wire clk,
-  input wire reset,
+  input wire resetn,
   output reg clk_out
 );
 
@@ -10,7 +10,7 @@ module clkdivider
 
   always @(posedge clk)
   begin
-    if (reset)
+    if (!resetn)
     begin
       counter <= 8'd0;
       clk_out <= 1'b0;
