@@ -17,6 +17,8 @@ set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets IOBUF_jtag_TCK/O]
 set_property PACKAGE_PIN L18  [get_ports fpga_rst]
 set_property PACKAGE_PIN AA1 [get_ports mcu_rst]
 set_property PACKAGE_PIN E18 [get_ports jtag_rst_for_mpA7lite]
+set_property -dict " PACKAGE_PIN M18 IOSTANDARD LVCMOS33 " [ get_ports {LED_blink} ]
+#set_property -dict { PACKAGE_PIN M18 IOSTANDARD LVCMOS33 } [ get_ports {LED_blink[1]} ]
 
 #####                spi define               #####
 set_property PACKAGE_PIN T19 [get_ports  qspi_cs    ]

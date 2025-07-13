@@ -4,6 +4,7 @@ module system
 (
   input wire CLK100MHZ,//GCLK-W19
   //input wire CLK32768KHZ,//RTC_CLK-Y18
+  output reg LED_blink,
 
   input wire fpga_rst,//FPGA_RESET-T6
   input wire mcu_rst,//MCU_RESET-P20
@@ -302,6 +303,15 @@ module system
     counter = (!ck_rst) ? 0 : (counter +1) % 244;
     CLK32768KHZ = (!ck_rst) ? 0 :
                   (counter ==0) ? ~CLK32768KHZ : CLK32768KHZ;
+  end
+  
+  reg [15:0] LED_counter;
+
+  always @(posedge CLK32768KHZ or negedge ck_rst)
+  begin
+    LED_counter = (!ck_rst) ? 0 : (counter +1) % 32768;
+    LED_blink = (!ck_rst) ? 0 :
+                  (counter ==0) ? ~LED_blink : LED_blink;
   end
 
 
