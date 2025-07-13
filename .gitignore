@@ -16,3 +16,11 @@ vsim/irq.rc
 
 fpga/*/src/system.v
 fpga/ddr200t-from-e203v2/
+fpga/*/obj/*
+fpga/*/.*/*
+fpga/.*/*
+.stfolder/
+.~*#
+vivado*.log
+vivado*.jou
+.stignore
