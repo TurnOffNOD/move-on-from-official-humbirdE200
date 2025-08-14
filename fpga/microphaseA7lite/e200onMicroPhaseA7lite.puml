@@ -1,0 +1,48 @@
+@startuml verilog2mcuAndSW
+skinparam linetype ortho
+
+package "FPGAdevBoard" {
+    frame FPGA {
+        port "JTAG download interface" as jdown
+        component "hbird\ne200" as e200 {
+            port "JTAG debugging interface" as jdebug
+            port uartport
+        }
+    }
+'    e200 -u- jdebug
+'    e200 -u- uartport
+'    FPGA -l- jdown
+}
+
+package "Computeter" {
+    component "Vivado" as EDA
+    EDA <--> jdown : bitstream烧录和FPGA信息反馈
+
+    frame "Nuclei IDE" as IDE {
+        component OpenOCD
+        component GDB
+        component otherToolchain
+    }
+
+    port JTAGdebugger
+
+    'EDA -[hidden]- IDE
+
+    'otherToolchain -[hidden]- GDB
+
+    GDB .. OpenOCD
+    OpenOCD <-d-> JTAGdebugger : 程序下载和调试
+    JTAGdebugger -d- jdebug : 硬件连线
+
+    'component serialterminal
+    port uart2usb
+
+    'IDE -[hidden]- uart2usb
+    'serialterminal -[hidden]- uart2usb
+    uart2usb -- uartport : 硬件连线
+
+    component serialTerminal
+    uart2usb <--> serialTerminal
+}
+
+@enduml
